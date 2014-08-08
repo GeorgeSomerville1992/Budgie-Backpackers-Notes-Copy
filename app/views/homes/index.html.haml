@@ -1,0 +1,91 @@
+.orbit-container
+  %ul.example-orbit.orbit-slides-container{"data-orbit" => ""}
+    %li
+      %img{alt: "slide 1", src: "/assets/backgroundhome.jpg"}/
+
+      .orbit-caption{style: "background-color: #FF27F9"}
+        Caption One.
+    %li.active
+      %img{alt: "slide 1", src: "/assets/backgroundhome.jpg"}/
+      .orbit-caption{style: "background-color: #FF27F9"}
+        
+    %li
+      %img{alt: "slide 2", src: "/assets/traveltwo.png"}/
+      .orbit-caption{style: "background-color: #FF27F9"}
+        Caption Three.
+  #bird 
+   
+  
+.span.transitions-enabled.large-centered.clearfix
+  #container
+
+    .box.col2 
+      %img.imageanimate.animated{src: "/assets/backpacker1.jpeg.png", style: "width:200px; height: 200px" }/
+
+    .box.col2
+      %img{src: "/assets/backpacker6.jpeg", style: "width:200px; height: 200px"}/
+    .box.col2
+      .flip
+        .textcontainerflip{style: "width:400px; height: 270px"}
+          .flip-front.flipfront400-270
+            %h3 
+              %i.fa.fa-globe &nbsp; Instantly find a place to stay anywhere
+              %p Are you on a budget and desperately looking for a cheap hostel to say in? Or just wanting to explore some new places. Budgie Backpackers enables you to find the cheapest hostels/hotels within a searched city or current location. You can also find various attractions via a search term, see who’s checking in, and also other user reviews.
+          .flip-back.flipback400-270
+            %h3 Discounts and deals coming soon
+            %p real time search will find you coupons to gain discounts
+     
+    .box.col2
+      %img.imageanimate.animated{src: "/assets/backpacker3.jpeg", style: "width:200px; height: 200px"}/
+    .box.col2
+      %img.imageanimate.animated{src: "/assets/backpacker4.jpeg.png", style: "width:200px; height: 200px"}/
+    .box.col2
+      .flip
+        .textcontainerflip{style: "width:400px; height:200px"}
+          .flip-front.flipfront400-150
+            %h3 
+              %i.fa.fa-child &nbsp; Connect with your friends
+              %p View saved locations, checkins and photos through foursquare
+          .flip-back.flipback400-150
+            %p 
+
+
+    .box.col2
+      .flip 
+        .textcontainerflip{style: "width: 220px; height:280px"}
+          .flip-front.flipfront240-325
+            %h3 
+              %i.fa.fa-camera &nbsp; See
+            %li Hostels
+            %li Attractions 
+            %li Cheapest prices 
+            %li Trends
+            %li Checkins 
+            %li Reviews
+            %li Videos
+            %li And much more!
+          .flip-back.flipback240-325
+            %p 
+    .box.col2
+      %img.imageanimate.animated{src: "/assets/backpacker7.jpeg", style: "width:200px; height: 200px"}/
+    .box.col2
+      %img.imageanimate.animated{src: "/assets/backpacker2.jpeg", style: "width:200px; height: 200px" }/
+    .box.col2
+      .signup-signin
+        %h3.left
+          .button.leftwelcome
+            = link_to 'SignUp', new_user_registration_path
+        %h3
+          .button.rightwelcome
+            = link_to 'Login', new_user_session_path
+    .box.col2
+      .smallblankleft       
+    .box.col2
+      %img{src: "/assets/logolarge.fw.png"}/
+    .box.col2
+      .copyright
+        %p @George Somerville Test Project WDI-London-2014
+    .box.col2
+      .smallblankright
+             
+    

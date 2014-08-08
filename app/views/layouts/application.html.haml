@@ -1,0 +1,158 @@
+!!!
+%html
+  %head
+    %meta{charset: "utf-8"}/
+    %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}/
+    %title BudgieBackpackers
+    = yield :templates
+    = include_gon(:init => true)
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "vendor/modernizr"
+    = csrf_meta_tags
+    %link{href: "//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css", rel: "stylesheet"}/
+    %script{src: "https://www.google.com/jsapi", type: "text/javascript"}
+    %script{src: "http://maps.googleapis.com/maps/api/js?libraries=places", type: "text/javascript"}   
+    %script google.load("earth", "1", {"other_params":"sensor=true_or_false"}); 
+  %body
+    / #container
+    /   .user-nav
+    /     - if user_signed_in?
+    /       Logged in as
+    /       %b= current_user.email
+    /       = link_to 'Edit Profile', edit_user_registration_path
+    /       \|
+    /       = link_to 'Logout',  destroy_user_session_path, method: :delete
+    /     - else
+    /       = link_to 'Sign up', new_user_registration_path
+    /       \|
+    /       = link_to 'Login', new_user_session_path
+
+    /   - flash.each do |name, msg|
+    /     = content_tag :div, msg, :id => "flash_#{name}"
+    #hi
+    .off-canvas-wrap{"data-offcanvas" => ""}
+      .inner-wrap.maincanvaswrap
+        / OFF CANVAS MENU BAR
+        
+        %nav.tab-bar.sticky
+          %section.left-small
+            %a.left-off-canvas-toggle.menu-icon
+              %span
+          %section.right.tab-bar-section{style: "padding:0px;"}
+            %nav.top-bar{data:{topbar:""}}
+              
+              %section.top-bar-section
+                / Right Nav Section
+                %ul.right
+                  %li.has-dropdown
+                    - if user_signed_in?
+                      - if current_user.image? && current_user.name?
+                        %li.has-dropdown 
+                          %b.imgmoveleft= image_tag current_user.image, class: "small-avatar"
+                          %b.imgmoveleft= current_user.name
+                          %ul.dropdown
+                            %li
+                              = link_to 'Logout', destroy_user_session_path, method: 'delete'
+                            %li
+                              = link_to 'Edit Profile', edit_user_registration_path   
+                      - else    
+                        %li.has-dropdown
+                          %a{href:"#"}= current_user.email
+                          %ul.dropdown
+                            %li
+                              = link_to 'Logout', destroy_user_session_path, method: 'delete'
+                            %li
+                              = link_to 'Edit Profile', edit_user_registration_path  
+                    - else
+                      %li.has-dropdown
+                        = link_to 'Login', new_user_session_path
+                        %ul.dropdown  
+                          %li 
+                            = link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2)
+                          %li 
+                            = link_to "Sign in with twitter", user_omniauth_authorize_path(:twitter)     
+                      %li.active.has-dropdown.red
+                        = link_to 'Sign Up', new_user_registration_path          
+                        %ul.dropdown
+                          %li
+                            = link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2)   
+                          %li 
+                            = link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter)
+                          %li
+                            = link_to "Sign in with Foursquare", user_omniauth_authorize_path(:foursquare)                          
+                %ul.left 
+                  %li
+                    %div{style: "width:50px; height:45px; background-color: #00ADF1"}
+                      %img{src: "/assets/logo.png", style: "padding: 5px; margin-bottom:2px;"}/
+                  %li 
+                    = link_to 'Home', root_path
+                  %li
+                    = link_to 'Hostels', hostels_path
+                  %li 
+                    = link_to 'User Journals', posts_path  
+            %section.right-small
+              %a.right-off-canvas-toggle.menu-icon    
+                %span
+               
+        / END NAV.TAB-BAR HIDE-FOR-LARGE-UP
+        / OFF CANVAS MENU
+        %aside.left-off-canvas-menu
+          %ul.off-canvas-list
+            %li
+              %label Navigation
+            %li
+              = link_to 'Home', root_path  
+            %li
+              = link_to 'Hostels', hostels_path
+            %li
+              = link_to 'User Journals', posts_path
+                     
+        %aside.right-off-canvas-menu 
+          - if @hostel
+            #keycontainer
+              %h3 Key 
+              %h4 Hotels
+              %img{src: "/assets/hotel_0star_red.png"}: 90+ 
+              %br
+              %img{src: "/assets/hotel_0star_yellow.png"}: 70 - $90 
+              %br
+              %img{src: "/assets/hotel_0star_orange.png"}: 50 - $70 
+              %br
+              %img{src: "/assets/hotel_0star_green.png"}: 0 - $40 
+              %p 
+              %h4 Attractions
+              %img{src: "/assets/beer.png"}: Pub
+              %br
+              %img{src: "/assets/coffee.png"}: Coffeeshop/cafe
+              %br
+              %img{src: "/assets/restaurant.png"}: Restaurant
+              %br
+              %img{src: "/assets/winebar.png"}: Wine bar
+              %br
+              %img{src: "/assets/panoramicview.png"}: other
+              %br 
+              %h4 Local Weather
+            %div#weatherwiget{align: "center" }>  
+              %script{src: "http://www.weatherforecastmap.com/weather2.php?zona=#{@hostel.address}"}
+          - else  
+            %p you need to sign in!     
+        .maincontainer       
+          = yield           
+          .row
+            .container    
+              -flash.each do |name, message|
+                %div{class: "alert alert-info alert-dismissable"}
+                  %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", type: "button"} &#215;
+                  = message  
+    / = javascript_include_tag "foundation.offcanvas"        
+    = javascript_include_tag "application" 
+    
+
+
+    
+      
+
+
+
+
+   
